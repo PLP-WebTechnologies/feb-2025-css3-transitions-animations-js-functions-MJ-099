@@ -1,25 +1,28 @@
-const button = document.getElementById('colorButton');
-const colorPicker = document.getElementById('colorPicker');
+const btn = document.getElementById('animateBtn');
 
-// Load stored color preference on page load
+// Function to trigger animation and save state in localStorage
+function triggerAnimation() {
+  btn.classList.add('animate-pulse');
+  localStorage.setItem('btnClicked', 'true');
+
+  // Remove animation class after it ends to allow retriggering
+  btn.addEventListener('animationend', () => {
+    btn.classList.remove('animate-pulse');
+  }, { once: true });
+}
+
+// Check localStorage on page load
 window.onload = () => {
-  const savedColor = localStorage.getItem('favoriteColor');
-  if (savedColor) {
-    button.style.backgroundColor = savedColor;
-    colorPicker.value = savedColor;
+  const clicked = localStorage.getItem('btnClicked');
+
+  if (clicked === 'true') {
+    // Optionally, trigger animation on load or change button text
+    btn.textContent = "You've clicked me!";
   }
 };
 
-// Change button color and save preference
-colorPicker.addEventListener('change', () => {
-  const selectedColor = colorPicker.value;
-  button.style.backgroundColor = selectedColor;
-  localStorage.setItem('favoriteColor', selectedColor);
-});
-
-// Animate button on click
-button.addEventListener('click', () => {
-  button.classList.add('pulse');
-  // Remove animation class after animation completes (500ms)
-  setTimeout(() => button.classList.remove('pulse'), 500);
+// Add event listener to button
+btn.addEventListener('click', () => {
+  triggerAnimation();
+  btn.textContent = "Clicked!";
 });

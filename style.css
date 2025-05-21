@@ -1,21 +1,29 @@
-button {
-  padding: 10px 20px;
-  font-size: 16px;
-  cursor: pointer;
-  background-color: blue;
+/* Basic button styling */
+#animateBtn {
+  padding: 15px 30px;
+  font-size: 18px;
+  background-color: #007bff;
   color: white;
   border: none;
-  border-radius: 6px;
-  transition: background-color 0.5s ease;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
 }
 
-/* Animation for the button pulse */
+/* Animation keyframes: color pulse */
 @keyframes pulse {
-  0% { transform: scale(1); }
-  50% { transform: scale(1.1); }
-  100% { transform: scale(1); }
+  0% {
+    background-color: #007bff;
+  }
+  50% {
+    background-color: #00c6ff;
+  }
+  100% {
+    background-color: #007bff;
+  }
 }
 
-.pulse {
-  animation: pulse 0.5s ease;
+/* Class that triggers animation */
+.animate-pulse {
+  animation: pulse 1.5s ease-in-out 3;
 }
